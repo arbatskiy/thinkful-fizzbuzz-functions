@@ -1,15 +1,31 @@
 $(document).ready(function() {
-	for (var i = 1; i <= 15; i++) {
+	$('#fizzbuzz-form').on('submit', function(e) {
+		e.preventDefault();
+		var container = $('#fizz-buzz-container');
+		container.empty();
+		var number = +$('#input-number').val();
+		$('#input-number').val('');
+		if (isNaN(number) || number % 1 !== 0) {
+			$('#error').show();
+		} else {
+			$('#error').hide();
+			fizzBuzz(number, container);
+		}
+	});
+});
+
+function fizzBuzz(num, container) {
+	for (i = 1; i <= num; i++) {
 		if (i % 3 === 0 && i % 5 === 0) {
-			$('body').append('<p><strong>FizzBuzz</strong></p>');
+			container.append('<p><strong>FizzBuzz</strong></p>');
 		} else if (i % 3 === 0) {
-			$('body').append('<p><strong>Fizz</strong></p>');
+			container.append('<p><strong>Fizz</strong></p>');
 		} else if (i % 5 === 0) {
-			$('body').append('<p><strong>Buzz</strong></p>');
+			container.append('<p><strong>Buzz</strong></p>');
 		} else {
 			var html = "<p><strong>" + i + "</strong></p>";
-			$('body').append(html);
+			container.append(html);
 		}
 	}
-});
+}
 
